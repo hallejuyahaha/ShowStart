@@ -23,5 +23,13 @@ class MysqlPipeline(object):
             insert into showstart(showname, actor, price, time,place,url,type)
             VALUES (%s, %s, %s, %s, %s, %s, %s) 
         """
-        self.cursor.execute(insert_sql, (item["showname"], item["actor"], item["price"],  item["time"],  item["place"],  item["url"],  item["type"]))
+        shownametemp = item["showname"].replace('\r','').replace('\n','').replace('\t','')
+        actortemp = item["actor"].replace('\r','').replace('\n','').replace('\t','')
+        pricetemp = item["price"]
+        timetemp = item["time"]
+        placetemp = item["place"]
+        urltemp = item["url"]
+        typetemp = item["type"]
+
+        self.cursor.execute(insert_sql, (shownametemp, actortemp, pricetemp,  timetemp,  placetemp,  urltemp,  typetemp))
         self.conn.commit()

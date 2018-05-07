@@ -19,6 +19,7 @@ class ShowStartItem(scrapy.Item):
     place = scrapy.Field()
     url = scrapy.Field()
     type = scrapy.Field()
+    StartOrEnd = scrapy.Field()
 
 class ShowStartItemLoader(ItemLoader):
     #自定义itemloader
