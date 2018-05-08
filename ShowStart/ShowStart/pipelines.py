@@ -20,8 +20,8 @@ class MysqlPipeline(object):
 
     def process_item(self, item, spider):
         insert_sql = """
-            insert into showstart(showname, actor, price, time,place,url,type)
-            VALUES (%s, %s, %s, %s, %s, %s, %s) 
+            insert into showstart(showname, actor, price, time,place,url,type,StartOrEnd)
+            VALUES (%s, %s, %s, %s, %s, %s, %s,%s) 
         """
         shownametemp = item["showname"].replace('\r','').replace('\n','').replace('\t','')
         actortemp = item["actor"].replace('\r','').replace('\n','').replace('\t','')
@@ -29,7 +29,12 @@ class MysqlPipeline(object):
         timetemp = item["time"]
         placetemp = item["place"]
         urltemp = item["url"]
-        typetemp = item["type"]
+        try:
+            typetemp = item["type"]
+        except:
+            typetemp = 'NoType'
 
-        self.cursor.execute(insert_sql, (shownametemp, actortemp, pricetemp,  timetemp,  placetemp,  urltemp,  typetemp))
+        StartOrEnd = item["StartOrEnd"]
+
+        self.cursor.execute(insert_sql, (shownametemp, actortemp, pricetemp,  timetemp,  placetemp,  urltemp,  typetemp,StartOrEnd))
         self.conn.commit()

@@ -25,9 +25,9 @@ class ShowstartspiderSpider(scrapy.Spider):
             # 获取 未开始 或 已结束
             overtemp = post_node.css(".g-time")
             if (overtemp.css(".col-theme").extract_first("") == ''):
-                overornot = "1"
+                overornot = 1
             else:
-                overornot = "0"
+                overornot = 0
             # 获取 价格
             if(post_node.css(".g-price").extract_first("") == ''):
                 price = 0
@@ -58,10 +58,8 @@ class ShowstartspiderSpider(scrapy.Spider):
 
         item_loader.add_value("price", response.meta.get("Price", "") )
         item_loader.add_value("url", response.url)
-        try:
-            item_loader.add_css("type", ".goods-type span::text")
-        except:
-            item_loader.add_value("type", "NoType")
+
+        item_loader.add_css("type", ".goods-type span::text")
 
         item_loader.add_value("StartOrEnd", response.meta.get("OverOrNot", ""))
 

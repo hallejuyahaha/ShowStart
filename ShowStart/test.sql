@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2018-05-07 17:22:24
+Date: 2018-05-08 15:46:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `cnblognews` (
   `url` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for showstart
@@ -46,4 +46,4 @@ CREATE TABLE `showstart` (
   `type` varchar(255) DEFAULT '',
   `StartOrEnd` tinyint(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2229 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3520 DEFAULT CHARSET=utf8;
