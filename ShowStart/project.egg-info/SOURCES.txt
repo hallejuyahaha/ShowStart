@@ -1,0 +1,13 @@
+setup.py
+ShowStart/__init__.py
+ShowStart/items.py
+ShowStart/middlewares.py
+ShowStart/pipelines.py
+ShowStart/settings.py
+ShowStart/spiders/ShowStartSpider.py
+ShowStart/spiders/__init__.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt

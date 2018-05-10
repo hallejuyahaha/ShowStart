@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+import sys
+import  os
 # Scrapy settings for ShowStart project
 #
 # For simplicity, this file contains only settings considered important or
@@ -52,9 +53,9 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'ShowStart.middlewares.ShowstartDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'ShowStart.middlewares.JSPageMiddleware': 1,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -67,6 +68,10 @@ ROBOTSTXT_OBEY = False
 ITEM_PIPELINES = {
    'ShowStart.pipelines.MysqlPipeline': 1,
 }
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print (os.path.join(BASE_DIR, 'ShowStart'))
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
