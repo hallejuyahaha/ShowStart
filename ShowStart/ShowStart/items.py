@@ -20,7 +20,7 @@ class ShowStartItem(scrapy.Item):
     url = scrapy.Field()
     type = scrapy.Field()
     StartOrEnd = scrapy.Field()
-
+    front_image_path = scrapy.Field()
 class ShowStartItemLoader(ItemLoader):
     #自定义itemloader
     default_output_processor = TakeFirst()

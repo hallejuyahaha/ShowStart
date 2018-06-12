@@ -21,7 +21,7 @@ class ShowstartspiderSpider(scrapy.Spider):
     def __init__(self):
         # chrome不加载图片
         chrome_opt = webdriver.ChromeOptions()
-        prefs = {"profile.managed_default_content_settings.images": 2}
+        prefs = {"profile.managed_default_content_settings.images": 1}
         chrome_opt.add_experimental_option("prefs", prefs)
         self.browser = webdriver.Chrome(executable_path="E:\chromedriver\chromedriver.exe", chrome_options=chrome_opt)
         super(ShowstartspiderSpider, self).__init__()
@@ -52,6 +52,8 @@ class ShowstartspiderSpider(scrapy.Spider):
                 match_re = re.match("￥(\d+)[\s\S]*", pricetemp)
                 if match_re:
                     price = match_re.group(1)
+
+
             #传送运行
             yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price}, callback=self.parse_detail)#"price":price,
 
@@ -73,9 +75,9 @@ class ShowstartspiderSpider(scrapy.Spider):
 
         item_loader.add_value("price", response.meta.get("Price", "") )
         item_loader.add_value("url", response.url)
-
+        item_loader.add_value("url", response.url)
         item_loader.add_css("type", ".goods-type span::text")
-
+        item_loader.add_xpath("front_image_path","//a[@class='poster s-fancybox ll']/img/@src")
         item_loader.add_value("StartOrEnd", response.meta.get("OverOrNot", ""))
 
         Items = item_loader.load_item()
