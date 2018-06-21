@@ -15,7 +15,7 @@ from scrapy.selector import  Selector
 
 #设置chrome不加载图片
 chrome_opt = webdriver.ChromeOptions()
-prefs = {"profile.managed_default_content_settings.images":2}
+prefs = {"profile.managed_default_content_settings.images":1}
 chrome_opt.add_experimental_option("prefs",prefs)
 
 browser = webdriver.Chrome(executable_path="E:\chromedriver\chromedriver.exe",chrome_options=chrome_opt)
