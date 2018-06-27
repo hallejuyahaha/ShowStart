@@ -1,17 +1,15 @@
 ﻿using ShowStart.IDal;
+using ShowStart.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShowStart.Model;
-using System.Linq.Expressions;
-using System.Data.Entity;
-using System.Data;
 
 namespace ShowStart.Dal
 {
-    public class UserInfoDal:BaseDal<userinfo>, IUserInfoDal
+    public class CollectionDal:BaseDal<collection>,ICollectionDal
     {
         DbContext Db = Dal.DBContextFactory.createDbContext();
     }

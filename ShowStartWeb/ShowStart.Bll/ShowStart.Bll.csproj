@@ -40,7 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInfoService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShowStart.DalFactory\ShowStart.DalFactory.csproj">
+      <Project>{528ceec1-ab72-4caf-a279-a68d816b84c5}</Project>
+      <Name>ShowStart.DalFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowStart.Dal\ShowStart.Dal.csproj">
+      <Project>{5FA72408-C7AC-425F-BA17-A4E162FAE3C9}</Project>
+      <Name>ShowStart.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowStart.IBll\ShowStart.IBll.csproj">
+      <Project>{764c8160-d6b8-4347-9518-0c24d2d8c1ab}</Project>
+      <Name>ShowStart.IBll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowStart.IDal\ShowStart.IDal.csproj">
+      <Project>{a6cf3a3d-0dd5-4ce3-a60f-24069da3b35c}</Project>
+      <Name>ShowStart.IDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShowStart.Model\ShowStart.Model.csproj">
+      <Project>{deeda98f-89b7-4d73-8bd3-9cb304335160}</Project>
+      <Name>ShowStart.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
