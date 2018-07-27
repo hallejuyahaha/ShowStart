@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShowStart.Model;
+using ShowStartWeb.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +10,11 @@ namespace ShowStartWeb.Controllers
 {
     public class HomeController : Controller
     {
+        // GET: Home
+        [LoginFilter]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            userinfo user = Session["UserInfo"] as userinfo;
             return View();
         }
     }
