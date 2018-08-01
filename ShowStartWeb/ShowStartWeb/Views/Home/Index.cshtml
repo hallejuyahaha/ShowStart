@@ -1,181 +1,38 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "Skr Skr Skr";
+    Layout = "~/Views/Shared/HomeModel.cshtml";
 }
 
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">鲁拉鲁拉雷</h4>
+    </div>
+</div>
 
-    <title>Skr Skr</title>
-    <!-- BOOTSTRAP CORE STYLE  -->
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <!-- FONT AWESOME ICONS  -->
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE  -->
-    <link href="~/Content/style.css" rel="stylesheet" />
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <strong>Email: </strong>info@yourdomain.com
-                    &nbsp;&nbsp;
-                    <strong>Support: </strong>+90-897-678-44
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- HEADER END-->
-    <div class="navbar navbar-inverse set-radius-zero">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img src="~/Images/logo.png" />
-                </a>
-            </div>
-
-            <div class="left-div">
-                <div class="user-settings-wrapper">
-                    <ul class="nav">
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                                <span class="glyphicon glyphicon-user" style="font-size: 25px;"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-settings">
-                                <div class="media">
-                                    <a class="media-left" href="#">
-                                        <img src="~/Images/64-64.jpg" alt="" class="img-rounded" />
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">Jhon Deo Alex </h4>
-                                        <h5>Developer & Designer</h5>
-
-                                    </div>
-                                </div>
-                                <hr />
-                                <h5><strong>Personal Bio : </strong></h5>
-                                Anim pariatur cliche reprehen derit.
-                                <hr />
-                                <a href="#" class="btn btn-info btn-sm">Full Profile</a>&nbsp; <a href="login.html" class="btn btn-danger btn-sm">Logout</a>
-
-                            </div>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
+<div class="row">
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="dashboard-div-wrapper bk-clr-one">
+            <h1>@ViewData["allCountyesterday"]</h1>
+            <h5>前一天总数量</h5>
         </div>
     </div>
-    <!-- LOGO HEADER END-->
-    <section class="menu-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="navbar-collapse collapse ">
-                        <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a class="menu-top-active" href="index.html">Dashboard</a></li>
-                            <li><a href="ui.html">UI Elements</a></li>
-                            <li><a href="table.html">Data Tables</a></li>
-                            <li><a href="forms.html">Forms</a></li>
-                            <li><a href="login.html">Login Page</a></li>
-                            <li><a href="blank.html">Blank Page</a></li>
-
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- MENU SECTION END-->
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">鲁拉鲁拉雷</h4>
-                </div>
-            </div>
-            
-            <div class="copyrights">Collect from <a href="http://www.cssmoban.com/">企业网站模板</a></div>
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="dashboard-div-wrapper bk-clr-one">
-                        <i class="fa fa-venus dashboard-div-icon"></i>
-                        <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                            </div>
-
-                        </div>
-                        <h5>Simple Text Here </h5>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="dashboard-div-wrapper bk-clr-two">
-                        <i class="fa fa-edit dashboard-div-icon"></i>
-                        <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                            </div>
-
-                        </div>
-                        <h5>Simple Text Here </h5>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="dashboard-div-wrapper bk-clr-three">
-                        <i class="fa fa-cogs dashboard-div-icon"></i>
-                        <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                            </div>
-
-                        </div>
-                        <h5>Simple Text Here </h5>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <div class="dashboard-div-wrapper bk-clr-four">
-                        <i class="fa fa-bell-o dashboard-div-icon"></i>
-                        <div class="progress progress-striped active">
-                            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                            </div>
-
-                        </div>
-                        <h5>Simple Text Here </h5>
-                    </div>
-                </div>
-
-            </div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="dashboard-div-wrapper bk-clr-two">
+            <h1>@ViewData["allCounttoday"] </h1>
+            <h5>今日总数量</h5>
         </div>
     </div>
-    <!-- CONTENT-WRAPPER SECTION END-->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                   哈库拉马塔塔！！By 哈利路亚啊哈！！
-                </div>
-
-            </div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="dashboard-div-wrapper bk-clr-three">
+            <h1>@ViewData["NotShow"] </h1>
+            <h5>截止今日未开演</h5>
         </div>
-    </footer>
-    <!-- FOOTER SECTION END-->
-    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY SCRIPTS -->
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <!-- BOOTSTRAP SCRIPTS  -->
-    <script src="~/Scripts/bootstrap.js"></script>
-</body>
-</html>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="dashboard-div-wrapper bk-clr-four">
+            <h1>@ViewData["Collect"] </h1>
+            <h5>收藏</h5>
+        </div>
+    </div>
+</div>
 

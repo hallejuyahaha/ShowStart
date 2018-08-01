@@ -38,6 +38,41 @@ namespace ShowStart.DalFactory
                 _UserinfoDal = value;
             }
         }
+
+        private IShowStartDal _ShowStartDal;
+        public IShowStartDal ShowStartDal
+        {
+            get
+            {
+                if (_ShowStartDal == null)
+                {
+                    _ShowStartDal = AbstractFactory.createShowStartDal();//通过抽象工厂创建实例
+                }
+                return _ShowStartDal;
+            }
+            set
+            {
+                _ShowStartDal = value;
+            }
+        }
+
+        private ICollectionDal _CollectionDal;
+        public ICollectionDal CollectionDal
+        {
+            get
+            {
+                if (_CollectionDal == null)
+                {
+                    _CollectionDal = AbstractFactory.createCollectionDal();//通过抽象工厂创建实例
+                }
+                return _CollectionDal;
+            }
+            set
+            {
+                _CollectionDal = value;
+            }
+        }
+
         /// <summary>
         /// 连接一次数据库，对多张表进行操作
         /// 工作单元模式

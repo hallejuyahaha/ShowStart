@@ -1,4 +1,5 @@
-﻿using ShowStart.IDal;
+﻿
+using ShowStart.IDal;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -21,6 +22,19 @@ namespace ShowStart.DalFactory
             string fullClassName = NameSpace + ".UserInfoDal";
             return CreateInstance(fullClassName) as IUserInfoDal;
         }
+
+        public static IShowStartDal createShowStartDal()
+        {
+            string fullClassName = NameSpace + ".ShowStartDal";
+            return CreateInstance(fullClassName) as IShowStartDal;
+        }
+
+        public static ICollectionDal createCollectionDal()
+        {
+            string fullClassName = NameSpace + ".CollectionDal";
+            return CreateInstance(fullClassName) as ICollectionDal;
+        }
+
         private static object CreateInstance(string ClassName)
         {
             var assembly = Assembly.Load(AssemblyPath);
