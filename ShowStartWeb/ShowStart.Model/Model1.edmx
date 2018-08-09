@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="testModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="cnblognews">
           <Key>
             <PropertyRef Name="id" />
@@ -20,9 +20,9 @@
         </EntityType>
         <EntityType Name="collection">
           <Key>
-            <PropertyRef Name="username" />
+            <PropertyRef Name="url" />
           </Key>
-          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="url" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="showstart">
@@ -34,6 +34,7 @@
           <Property Name="actor" Type="varchar" MaxLength="255" />
           <Property Name="price" Type="varchar" MaxLength="255" />
           <Property Name="time" Type="varchar" MaxLength="255" />
+          <Property Name="starttime" Type="datetime" Precision="0" />
           <Property Name="place" Type="varchar" MaxLength="255" />
           <Property Name="url" Type="varchar" MaxLength="255" />
           <Property Name="type" Type="varchar" MaxLength="255" />
@@ -46,7 +47,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="255" />
@@ -59,8 +60,7 @@
           <EntitySet Name="showstart" EntityType="Self.showstart" Schema="test" store:Type="Tables" />
           <EntitySet Name="userinfo" EntityType="Self.userinfo" Schema="test" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -79,10 +79,10 @@
         </EntityType>
         <EntityType Name="collection">
           <Key>
-            <PropertyRef Name="username" />
+            <PropertyRef Name="url" />
           </Key>
-          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="url" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" Type="String" />
         </EntityType>
         <EntityType Name="showstart">
           <Key>
@@ -100,6 +100,7 @@
           <Property Name="ReadSessionTime" Type="DateTime" />
           <Property Name="front_image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ReadDate" Type="DateTime" />
+          <Property Name="starttime" Type="DateTime" />
         </EntityType>
         <EntityType Name="userinfo">
           <Key>
@@ -149,6 +150,7 @@
           <EntitySetMapping Name="showstart">
             <EntityTypeMapping TypeName="testModel.showstart">
               <MappingFragment StoreEntitySet="showstart">
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="showname" ColumnName="showname" />
                 <ScalarProperty Name="actor" ColumnName="actor" />

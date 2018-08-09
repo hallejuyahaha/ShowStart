@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShowStart.Bll
 {
-    public abstract class BaseService<T> where T:class,new()
+    public abstract class BaseService<T> where T : class, new()
     {
         public IDBSession CurrentDBSession
         {
@@ -31,12 +31,20 @@ namespace ShowStart.Bll
         }
         public bool DeleteEntity(T entity)
         {
-             CurrentDal.DeleteEntity(entity);
+            CurrentDal.DeleteEntity(entity);
             return CurrentDBSession.SaveChanges();
         }
+
+        //public int DeleteEntityWhere(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda = null)
+        //{
+        //    int count = CurrentDal.DeleteEntityWhere(whereLambda);
+        //    CurrentDBSession.SaveChanges();
+        //    return count;
+        //}
+
         public bool EditEntity(T entity)
         {
-             CurrentDal.EditEntity(entity);
+            CurrentDal.EditEntity(entity);
             return CurrentDBSession.SaveChanges();
         }
         public bool AddEntity(T entity)

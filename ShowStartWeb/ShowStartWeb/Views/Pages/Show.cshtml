@@ -3,10 +3,157 @@
     ViewBag.Title = "Show";
     Layout = "~/Views/Shared/HomeModel.cshtml";
 }
-<div class="row">
-    <div class="col-md-12">
-        <h4 class="page-head-line">全部演出</h4>
+<style>
+    ul {
+        list-style: none;
+    }
+
+        ul.imglist {
+            margin: 0 auto;
+            width: auto;
+            overflow: hidden;
+            padding: 0px;
+        }
+
+            ul.imglist li {
+                float: left;
+                padding-left: 20px;
+                width: 215px;
+            }
+
+                ul.imglist li a {
+                    color: black;
+                }
+
+                    ul.imglist li a p {
+                        margin: 0px;
+                        line-height: 20px;
+                        overflow: hidden; /*自动隐藏文字*/
+                        text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+                        white-space: nowrap; /*强制不换行*/
+                        width: 15em; /*不允许出现半汉字截断*/
+                    }
+
+                ul.imglist li img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                ul.imglist li span {
+                    font-size: 3px;
+                    display: block;
+                    width: 100%;
+                    height: 30px;
+                    line-height: 10px;
+                }
+</style>
+
+<section class="menu-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-collapse collapse ">
+                    <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <li><a href="../Home/Index">首页</a></li>
+                        <li><a class="menu-top-active" href="../Pages/Show">全部演出</a></li>
+                        <li><a href="../Pages/Collect">我的收藏</a></li>
+                        <li><a href="../Pages/AUs">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">全部演出</h4>
+            </div>
+        </div>
+        <div>
+            <ul class="imglist">
+                @foreach (var a in Model)
+                {
+                    <li>
+                        <a href="@a.url">
+                            <div>
+                                <img src="@a.front_image_path" isoriginal="true">
+                            </div>
+                            <p>@a.showname</p>
+                            <p>类型：@a.type</p>
+                            <p>艺人：@a.actor</p>
+                            <p>价格：<b>@a.price</b></p>
+                            <p>@a.time</p>
+                            <p>地点：@a.place</p>
+                        </a>
+                        @*@using (Ajax.BeginForm("MyCollect", "Pages", new AjaxOptions()
+                            {
+                                HttpMethod = "Post",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "CollectState",
+
+                            })) { }  mvc ajax*@
+
+                        @if (a.IsCollect == 1)
+                        {
+                            <button type="button" id="CollectState" value="1" class="btn btn-primary btn-lg">已收藏</button>
+                        }
+                        else
+                        {
+                            <button type="button" id="CollectState" value="0"  class="btn btn-info btn-lg">收藏</button>
+                        }
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
 </div>
-<h2>Show</h2>
 
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $("button").click(function ()
+        {
+            var target = $(this);
+            var showUrl = target.parent("li").children("a").attr("href");
+            var CollectOrNot = target.val();
+            $.ajax(
+            {
+                type:'post',
+                url: '/Pages/MyCollect',
+                data:{
+                    url: showUrl,
+                    CollectOrNot: CollectOrNot,
+                },
+                dataType:'json',
+                success: function (data, stutas, xhr) {
+                    var result = JSON.parse(data)
+                    if (result.msg == "IsCollect")
+                    {
+                        //加入了收藏
+                        target.val(1);
+                        target.text("已收藏");
+                        target.attr("class", "btn btn-primary btn-lg");
+
+                    } else if (result.msg == "NotCollect")
+                    {
+                        //删除了收藏
+                        target.val(0);
+                        target.text("收藏");
+                        target.attr("class", "btn btn-info btn-lg");
+                    }
+                },
+                error:function(xhr, textStatus, data){
+                    alert(data);
+                },
+                complete:function(xhr,textStatus){
+                    //alert(textStatus);
+                }
+            });
+        })
+    })
+</script>

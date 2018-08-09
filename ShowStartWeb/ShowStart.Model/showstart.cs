@@ -26,5 +26,6 @@ namespace ShowStart.Model
         public Nullable<System.DateTime> ReadSessionTime { get; set; }
         public string front_image_path { get; set; }
         public Nullable<System.DateTime> ReadDate { get; set; }
+        public Nullable<System.DateTime> starttime { get; set; }
     }
 }

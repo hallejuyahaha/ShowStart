@@ -3,35 +3,59 @@
     Layout = "~/Views/Shared/HomeModel.cshtml";
 }
 
-<div class="row">
-    <div class="col-md-12">
-        <h4 class="page-head-line">鲁拉鲁拉雷</h4>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="dashboard-div-wrapper bk-clr-one">
-            <h1>@ViewData["allCountyesterday"]</h1>
-            <h5>前一天总数量</h5>
+
+
+<section class="menu-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="navbar-collapse collapse ">
+                    <ul id="menu-top" class="nav navbar-nav navbar-right">
+                        <li><a class="menu-top-active" href="../Home/Index">首页</a></li>
+                        <li><a href="../Pages/Show">全部演出</a></li>
+                        <li><a href="../Pages/Collect">我的收藏</a></li>
+                        <li><a href="../Pages/AUs">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="dashboard-div-wrapper bk-clr-two">
-            <h1>@ViewData["allCounttoday"] </h1>
-            <h5>今日总数量</h5>
+</section>
+<!-- MENU SECTION END-->
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">鲁拉鲁拉雷</h4>
+            </div>
         </div>
-    </div>
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="dashboard-div-wrapper bk-clr-three">
-            <h1>@ViewData["NotShow"] </h1>
-            <h5>截止今日未开演</h5>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <div class="dashboard-div-wrapper bk-clr-four">
-            <h1>@ViewData["Collect"] </h1>
-            <h5>收藏</h5>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="dashboard-div-wrapper bk-clr-one">
+                    <h1>@ViewData["allCountyesterday"]</h1>
+                    <h5>前一天总数量</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="dashboard-div-wrapper bk-clr-two">
+                    <h1>@ViewData["allCounttoday"] </h1>
+                    <h5>今日总数量</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="dashboard-div-wrapper bk-clr-three">
+                    <h1>@ViewData["NotShow"] </h1>
+                    <h5>截止今日未开演</h5>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="dashboard-div-wrapper bk-clr-four">
+                    <h1>@ViewData["Collect"] </h1>
+                    <h5>收藏</h5>
+                </div>
+            </div>
         </div>
     </div>
 </div>

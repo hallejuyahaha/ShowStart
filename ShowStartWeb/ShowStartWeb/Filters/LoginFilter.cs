@@ -12,7 +12,7 @@ namespace ShowStartWeb.Filters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             //User a = filterContext.HttpContext.User;
-            if (filterContext.HttpContext.Session != null)
+            if (filterContext.HttpContext.Session["UserInfo"] != null)
             {
 
             }

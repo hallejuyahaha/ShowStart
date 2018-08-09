@@ -21,8 +21,8 @@ class MysqlPipeline(object):
 
     def process_item(self, item, spider):
         insert_sql = """
-            insert into showstart(showname, actor, price, time,place,url,type,StartOrEnd,ReadSessionTime,ReadDate,front_image_path)
-            VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s) 
+            insert into showstart(showname, actor, price, time,starttime,place,url,type,StartOrEnd,ReadSessionTime,ReadDate,front_image_path)
+            VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s) 
         """
         shownametemp = item["showname"].replace('\r','').replace('\n','').replace('\t','')
         actortemp = item["actor"].replace('\r','').replace('\n','').replace('\t','')
@@ -30,6 +30,8 @@ class MysqlPipeline(object):
         timetemp = item["time"]
         placetemp = item["place"]
         urltemp = item["url"]
+        starttimetemp = item["StartTime"]
+
         try:
             typetemp = item["type"]
         except:
@@ -39,5 +41,5 @@ class MysqlPipeline(object):
         ReadSessionTime = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')#现在
         ReadDate = datetime.datetime.now().strftime('%Y-%m-%d')  # 现在
         front_image_path = item["front_image_path"]
-        self.cursor.execute(insert_sql, (shownametemp, actortemp, pricetemp,  timetemp,  placetemp,  urltemp,  typetemp,StartOrEnd,ReadSessionTime,ReadDate,front_image_path))
+        self.cursor.execute(insert_sql, (shownametemp, actortemp, pricetemp,  timetemp, starttimetemp, placetemp,  urltemp,  typetemp,StartOrEnd,ReadSessionTime,ReadDate,front_image_path))
         self.conn.commit()

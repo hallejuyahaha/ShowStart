@@ -52,10 +52,13 @@ class ShowstartspiderSpider(scrapy.Spider):
                 match_re = re.match("￥(\d+)[\s\S]*", pricetemp)
                 if match_re:
                     price = match_re.group(1)
-
-
+            #获取开始时间
+            startTimeTemp = post_node.css(".g-time::text").extract_first("")
+            startTime_match_re = re.match("时间：(\d+/\d+/\d+ \d+:\d+)[\s\S]*", startTimeTemp)
+            if match_re:
+                startTime = startTime_match_re.group(1)
             #传送运行
-            yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price}, callback=self.parse_detail)#"price":price,
+            yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price, "StartTime":startTime}, callback=self.parse_detail)#"price":price,
 
         # 提取下一页并交给scrapy进行下载
         next_url = response.css(".page-next::attr(href)").extract_first("")
@@ -70,15 +73,16 @@ class ShowstartspiderSpider(scrapy.Spider):
         item_loader = ShowStartItemLoader(item=ShowStartItem(), response=response)
         item_loader.add_xpath("showname","//div[@class='items ll']/h1[@class='goods-name']/text()[last()]")
         item_loader.add_xpath("time", "//ul[@class='items-list']/li[1]/text()")
+
         item_loader.add_xpath("actor", "//ul[@class='items-list']/li[2]/a/text()")
         item_loader.add_xpath("place", "//ul[@class='items-list']/li[3]/a/text()")
 
         item_loader.add_value("price", response.meta.get("Price", "") )
         item_loader.add_value("url", response.url)
-        item_loader.add_value("url", response.url)
         item_loader.add_css("type", ".goods-type span::text")
         item_loader.add_xpath("front_image_path","//a[@class='poster s-fancybox ll']/img/@src")
         item_loader.add_value("StartOrEnd", response.meta.get("OverOrNot", ""))
+        item_loader.add_value("StartTime", response.meta.get("StartTime", ""))
 
         Items = item_loader.load_item()
         yield Items

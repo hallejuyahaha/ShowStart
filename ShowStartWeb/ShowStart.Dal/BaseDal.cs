@@ -30,9 +30,22 @@ namespace ShowStart.Dal
         public bool DeleteEntity(T entity)
         {
             Db.Entry<T>(entity).State = EntityState.Deleted;
-            //return Db.SaveChanges() > 0;
             return true;
         }
+
+        //public int DeleteEntityWhere(System.Linq.Expressions.Expression<Func<T, bool>> whereLambda = null)
+        //{
+        //    var set = Db.Set<T>().AsQueryable();
+        //    set = (whereLambda == null) ? set : set.Where(whereLambda);
+
+        //    int i = 0;
+        //    foreach (var item in set)
+        //    {
+        //        DeleteEntity(item);
+        //        i++;
+        //    }
+        //    return i;
+        //}
 
         public bool EditEntity(T entity)
         {

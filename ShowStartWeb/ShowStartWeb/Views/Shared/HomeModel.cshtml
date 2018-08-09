@@ -13,6 +13,13 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <!-- CUSTOM STYLE  -->
     <link href="~/Content/style.css" rel="stylesheet" />
+
+
+    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY SCRIPTS -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- BOOTSTRAP SCRIPTS  -->
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body>
     <header>
@@ -75,31 +82,8 @@
         </div>
     </div>
     <!-- LOGO HEADER END-->
-    <section class="menu-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="navbar-collapse collapse ">
-                        <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a class="menu-top-active" href="../Home/Index">Dashboard</a></li>
-                            <li><a href="../Pages/Show">全部演出</a></li>
-                            <li><a href="../Pages/Collect">我的收藏</a></li>
-                            <li><a href="../Pages/AUs">关于我们</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- MENU SECTION END-->
-    <div class="content-wrapper">
-        <div class="container">
-            <div>
-                @RenderBody()
-            </div>
-        </div>
-    </div>
 
+    @RenderBody()
     <footer>
         <div class="container">
             <div class="row">
@@ -110,10 +94,6 @@
         </div>
     </footer>
     <!-- FOOTER SECTION END-->
-    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <!-- CORE JQUERY SCRIPTS -->
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <!-- BOOTSTRAP SCRIPTS  -->
-    <script src="~/Scripts/bootstrap.js"></script>
+
 </body>
 </html>

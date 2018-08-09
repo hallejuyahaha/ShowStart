@@ -21,6 +21,7 @@ class ShowStartItem(scrapy.Item):
     type = scrapy.Field()
     StartOrEnd = scrapy.Field()
     front_image_path = scrapy.Field()
+    StartTime = scrapy.Field()
 class ShowStartItemLoader(ItemLoader):
     #自定义itemloader
     default_output_processor = TakeFirst()
