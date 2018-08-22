@@ -20,5 +20,6 @@ namespace ShowStart.Model
         public string email { get; set; }
         public string accountName { get; set; }
         public string phoneNumber { get; set; }
+        public bool daywarning { get; set; }
     }
 }

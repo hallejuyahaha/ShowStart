@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShowStart.Bll;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Xml;
 using Wx_Dev.AppCode;
 using Wx_Dev.Model;
+using ShowStart.Model;
 
 namespace ShowStartWeb
 {
@@ -50,6 +52,10 @@ namespace ShowStartWeb
             string returnMessage = string.Empty;
             bool isEncrypt = false;
 
+            //CollectionService CollectionBll = new CollectionService();
+            //ShowStartService ShowStartBll = new ShowStartService();
+
+
             try
             {
                 string encrypt_type = context.Request.QueryString["encrypt_type"] ?? "";//判断是否存此参数，若存在则在传递消息时进行加解密操作
@@ -91,6 +97,27 @@ namespace ShowStartWeb
                             {
                                 returnMessage = ResponseMessage.ReplyText(messageInfo.ToUserName, messageInfo.FromUserName, messageInfo.FromUserName);
                             }
+                            else if (messageInfo.Content == "如何使用")
+                            {
+                                string howToUse = "回复 未开场 获得未开场演出列表，回复 新开票 获得新开票演出列表，回复 我要收藏#艺人# 例如 我要收藏#花粥# 监控艺人演出如果开票本账号会通知您，回复 我的收藏 查看收藏列表";
+                                returnMessage = ResponseMessage.ReplyText(messageInfo.ToUserName, messageInfo.FromUserName, howToUse);
+                            }
+                            else if (messageInfo.Content == "我要收藏#花粥#")
+                            {
+                                //查看收藏 某个艺人
+                            }
+                            else if (messageInfo.Content == "我的收藏")
+                            {
+                                //查看收藏列表
+                            }
+                            else if (messageInfo.Content == "未开场演出")
+                            {
+
+                            }
+                            else if (messageInfo.Content == "新开票演出")
+                            {
+
+                            }
                             else
                             {
                                 //可以增加判断并且自定义返回消息
@@ -112,19 +139,7 @@ namespace ShowStartWeb
                             {
                                 if (messageInfo.Event.ToLower() == "subscribe")//关注
                                 {
-                                    string[] welcomeText = new string[] { "在火炉旁，找个地方随便坐。",
-                                    "欢迎回来，好久不见了。",
-                                    "小伙子们，看看谁来了。",
-                                    "嚯嚯嚯，很高兴见到你。",
-                                    "欢迎来到我的酒馆。",
-                                        "哈，快找个位置坐下来。",
-                                    "今晚累得够呛，但只要有客人来玩，我都欢迎。",
-                                    "把你冰冷的靴子脱下来烘烘热！",
-                                    "欢迎！小伙子们！在火炉旁挤挤！",
-                                    "你看到外面的鬼天气了吗！？还是这里暖和！"};
-                                    Random rd = new Random();
-                                    int num = rd.Next(0, welcomeText.Length - 1);
-                                    returnMessage = ResponseMessage.ReplyText(messageInfo.ToUserName, messageInfo.FromUserName, welcomeText[num]);
+                                    returnMessage = ResponseMessage.ReplyText(messageInfo.ToUserName, messageInfo.FromUserName, "欢迎关注阿稳查票,回复 如何使用 查看操作方法，目前仅支持南京地区哦");
                                     log4net.ILog logger = LogManager.GetLogger();
                                     logger.Error(Newtonsoft.Json.JsonConvert.SerializeObject(messageInfo));
                                 }
@@ -176,6 +191,7 @@ namespace ShowStartWeb
             }
             ResponseData(context, returnMessage, isEncrypt);
         }
+        
         /// <summary>
         /// 返回数据
         /// </summary>

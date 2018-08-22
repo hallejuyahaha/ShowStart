@@ -18,11 +18,13 @@ class ShowstartspiderSpider(scrapy.Spider):
     allowed_domains = ['www.showstart.com']
     start_urls = ['https://www.showstart.com/event/list?cityId=25&isList=1&pageNo=1']
 
-    def __init__(self):
+    def __init__(self,**kwargs):
         # chrome不加载图片
         chrome_opt = webdriver.ChromeOptions()
-        prefs = {"profile.managed_default_content_settings.images": 2}
-        chrome_opt.add_experimental_option("prefs", prefs)
+        # prefs = {"profile.managed_default_content_settings.images": 2}
+        # chrome_opt.add_experimental_option("prefs", prefs)
+        chrome_opt.add_argument('--headless')
+        chrome_opt.add_argument('--disable-gpu')
         self.browser = webdriver.Chrome(executable_path="E:\chromedriver\chromedriver.exe", chrome_options=chrome_opt)
         super(ShowstartspiderSpider, self).__init__()
         dispatcher.connect(self.spider_closed, signals.spider_closed)
