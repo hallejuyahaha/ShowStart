@@ -10,6 +10,7 @@ using System.Xml;
 using Wx_Dev.AppCode;
 using Wx_Dev.Model;
 using ShowStart.Model;
+using System.Text.RegularExpressions;
 
 namespace ShowStartWeb
 {
@@ -102,13 +103,17 @@ namespace ShowStartWeb
                                 string howToUse = "回复 未开场 获得未开场演出列表，回复 新开票 获得新开票演出列表，回复 我要收藏#艺人# 例如 我要收藏#花粥# 监控艺人演出如果开票本账号会通知您，回复 我的收藏 查看收藏列表";
                                 returnMessage = ResponseMessage.ReplyText(messageInfo.ToUserName, messageInfo.FromUserName, howToUse);
                             }
-                            else if (messageInfo.Content == "我要收藏#花粥#")
-                            {
-                                //查看收藏 某个艺人
-                            }
                             else if (messageInfo.Content == "我的收藏")
                             {
+                                //查看收藏 某个艺人
+                                //messageInfo.FromUserName   "oFcBd1XYeWd7JW2iIR30SnkJ9pRs"  微信号
+                            }
+                            //else if (messageInfo.Content == "我的收藏")Regex.IsMatch(value, regx)
+                            else if (Regex.IsMatch(messageInfo.Content, "我要收藏#(\\S)+#")) 
+                            {
                                 //查看收藏列表
+                                MatchCollection matchCol = Regex.Matches(messageInfo.Content, "#(\\S)+#");
+                                string actor = matchCol[0].ToString().Replace("#","");
                             }
                             else if (messageInfo.Content == "未开场演出")
                             {
