@@ -17,8 +17,9 @@ namespace ShowStart.Model
         public long id { get; set; }
         public string showname { get; set; }
         public string actor { get; set; }
-        public string price { get; set; }
+        public Nullable<decimal> price { get; set; }
         public string time { get; set; }
+        public Nullable<System.DateTime> starttime { get; set; }
         public string place { get; set; }
         public string url { get; set; }
         public string type { get; set; }
@@ -26,6 +27,5 @@ namespace ShowStart.Model
         public Nullable<System.DateTime> ReadSessionTime { get; set; }
         public string front_image_path { get; set; }
         public Nullable<System.DateTime> ReadDate { get; set; }
-        public Nullable<System.DateTime> starttime { get; set; }
     }
 }

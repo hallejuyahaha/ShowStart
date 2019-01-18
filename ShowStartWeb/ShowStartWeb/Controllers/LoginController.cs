@@ -24,6 +24,7 @@ namespace ShowStartWeb.Controllers
             string pwd = Request["pwd"];
             UserInfoService user = new ShowStart.Bll.UserInfoService();
             IQueryable<userinfo> userlist = user.LoadEntities(u => u.username == loginName && u.password == pwd);
+
             if (userlist.Count() > 0)
             {
                 userinfo userNow = userlist.FirstOrDefault();

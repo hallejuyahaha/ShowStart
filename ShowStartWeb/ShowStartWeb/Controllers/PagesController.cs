@@ -115,7 +115,7 @@ namespace ShowStartWeb.Controllers
                 id = c.id,
                 showname = c.showname,
                 actor = c.actor,
-                price = c.price,
+                price = c.price.ToString(),
                 time = c.time,
                 place = c.place,
                 url = c.url,
