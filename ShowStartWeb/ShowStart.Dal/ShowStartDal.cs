@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShowStart.Dal
 {
-    public class ShowStartDal:BaseDal<showstart>, IShowStartDal
+    public class ShowStartDal:BaseDal<showstarts>, IShowStartDal
     {
 
     }

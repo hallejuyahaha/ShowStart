@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShowStart.Bll
 {
-    public class ShowStartService : BaseService<showstart>, IShowStartService
+    public class ShowStartService : BaseService<showstarts>, IShowStartService
     {
         public override void SetCurrentDal()
         {

@@ -66,7 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseDal.cs" />
-    <Compile Include="ICollectionDal.cs" />
+    <Compile Include="IMonitorDal.cs" />
     <Compile Include="IShowStartDal.cs" />
     <Compile Include="IUserInfoDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

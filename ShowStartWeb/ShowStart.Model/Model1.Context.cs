@@ -13,10 +13,10 @@ namespace ShowStart.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class testEntities : DbContext
+    public partial class showstartEntities : DbContext
     {
-        public testEntities()
-            : base("name=testEntities")
+        public showstartEntities()
+            : base("name=showstartEntities")
         {
         }
     
@@ -25,9 +25,8 @@ namespace ShowStart.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cnblognews> cnblognews { get; set; }
-        public virtual DbSet<collection> collection { get; set; }
-        public virtual DbSet<showstart> showstart { get; set; }
+        public virtual DbSet<monitor> monitor { get; set; }
         public virtual DbSet<userinfo> userinfo { get; set; }
+        public virtual DbSet<showstarts> showstarts { get; set; }
     }
 }

@@ -14,7 +14,7 @@
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li><a class="menu-top-active" href="../Home/Index">首页</a></li>
                         <li><a href="../Pages/Show">全部演出</a></li>
-                        <li><a href="../Pages/Collect">我的收藏</a></li>
+                        <li><a href="../Pages/Collect">我的监控</a></li>
                         <li><a href="../Pages/AUs">关于我们</a></li>
                     </ul>
                 </div>
@@ -34,13 +34,13 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="dashboard-div-wrapper bk-clr-one">
-                    <h1>@ViewData["allCountyesterday"]</h1>
-                    <h5>前一天总数量</h5>
+                    <h1>@ViewData["allShow"]</h1>
+                    <h5>总数量</h5>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="dashboard-div-wrapper bk-clr-two">
-                    <h1>@ViewData["allCounttoday"] </h1>
+                    <h1>@ViewData["TodayShow"] </h1>
                     <h5>今日总数量</h5>
                 </div>
             </div>
@@ -52,8 +52,8 @@
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="dashboard-div-wrapper bk-clr-four">
-                    <h1>@ViewData["Collect"] </h1>
-                    <h5>收藏</h5>
+                    <h1>@ViewData["Monitor"] </h1>
+                    <h5>监控的歌手</h5>
                 </div>
             </div>
         </div>

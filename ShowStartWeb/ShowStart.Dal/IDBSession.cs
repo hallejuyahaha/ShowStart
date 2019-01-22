@@ -14,8 +14,8 @@ namespace ShowStart.Dal
         DbContext Db { get; }
         IUserInfoDal UserInfoDal { get; }
         IShowStartDal ShowStartDal { get; }
-        ICollectionDal CollectionDal { get; set; }
 
+        IMonitorDal MonitorDal { get; }
         bool SaveChanges();
     }
 }

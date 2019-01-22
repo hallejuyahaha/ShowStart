@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace ShowStart.IDal
 {
-    public interface IShowStartDal : IBaseDal<showstart>
+    public interface IShowStartDal : IBaseDal<showstarts>
     {
      
     }

@@ -23,7 +23,33 @@ namespace ShowStartWcf
         // TODO: 在此添加您的服务操作
     
         [OperationContract]
-        List<showstart> GetShow();
+        List<showstarts> GetShow();
+
+        /// <summary>
+        /// 登陆接口，
+        /// 成功返回1
+        /// 失败返回0
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <returns></returns>
+        [OperationContract]       
+        int Login(string username, string password);
+
+        /// <summary>
+        /// 注册用户
+        /// 成功返回1
+        /// 失败返回0
+        /// 用户名重复返回2
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="email"></param>
+        /// <param name="phonenumber"></param>
+        /// <param name="sex"></param>
+        /// <returns></returns>
+        [OperationContract]
+        int Register(string username, string password, string email, string phonenumber, string sex, string accountName);
     }
 
 

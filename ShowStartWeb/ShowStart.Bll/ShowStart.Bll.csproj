@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
-    <Compile Include="CollectionService.cs" />
+    <Compile Include="MonitorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowStartService.cs" />
     <Compile Include="UserInfoService.cs" />
@@ -67,6 +67,9 @@
       <Project>{deeda98f-89b7-4d73-8bd3-9cb304335160}</Project>
       <Name>ShowStart.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -59,14 +59,49 @@ namespace ShowStartWcf
             return composite;
         }
 
-        public List<showstart> GetShow()
+        public List<showstarts> GetShow()
         {
             ShowStartService ShowStartBll = new ShowStartService();
-            IQueryable<showstart> shows = ShowStartBll.LoadEntities(u => u.ReadDate == DateTime.Today && u.StartOrEnd == 1);
-            List<showstart> a = shows.ToList();
+            IQueryable<showstarts> shows = ShowStartBll.LoadEntities(u => u.startime > DateTime.Today);
+            List<showstarts> a = shows.ToList();
             return a;
         }
-        
+
+        public int Login(string username, string password)
+        {
+            UserInfoService userInfoService = new UserInfoService();
+            IQueryable<userinfo> userinfos = userInfoService.LoadEntities(_x => _x.username == username && _x.password == password);
+            if (userinfos.Count() > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public int Register(string username, string password, string email, string phonenumber, string sex, string accountName)
+        {
+            UserInfoService userInfoService = new UserInfoService();
+            IQueryable<userinfo> userinfos = userInfoService.LoadEntities(_x => _x.username == username);
+            if (userinfos.Count() > 0)
+            {
+                return 2;
+            }
+            else
+            {
+                userinfo newUser = new userinfo() { username = username, password = password, email = email, phoneNumber = phonenumber, sex = sex , accountName  = accountName };
+                if (userInfoService.AddEntity(newUser))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
     public class AsyncCompleteEventArgs : EventArgs
     {

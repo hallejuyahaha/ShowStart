@@ -3,6 +3,7 @@ using ShowStart.Model;
 using ShowStartWeb.Filters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,28 +23,30 @@ namespace ShowStartWeb.Controllers
             ViewData["UserEmail"] = user.email;
             ViewData["UserPhoneNumber"] = user.phoneNumber;
 
-            //前一天总量
-            DateTime yesterday = DateTime.Today.AddDays(-1);
-            IQueryable<showstart> showstartListyesterday = ShowStartBll.LoadEntities(u=>u.ReadDate== yesterday);
-            int allCountyesterday = showstartListyesterday.Count();
-            ViewData["allCountyesterday"] = allCountyesterday;
+            //总数
+            IQueryable<showstarts> showstartList = ShowStartBll.LoadEntities(u => u.showname != "");
+            int allShow = showstartList.Count();
+            ViewData["allShow"] = allShow;
 
-            //今日总量
-            DateTime today = DateTime.Today;
-            IQueryable<showstart> showstartListtoday = ShowStartBll.LoadEntities(u => u.ReadDate == today);
+            //今天的演出
+            DateTime today = DateTime.Today.Date;
+            DateTime todayBegin = today.AddSeconds(1);
+            DateTime todayEnd = today.AddDays(1).AddSeconds(-1);
+
+            IQueryable<showstarts> showstartListtoday = ShowStartBll.LoadEntities(u => u.startime > todayBegin && u.startime < todayEnd);
             int allCounttoday = showstartListtoday.Count();
-            ViewData["allCounttoday"] = allCounttoday;
+            ViewData["TodayShow"] = allCounttoday;
 
-            //截止今日未开演
-            IQueryable<showstart> showstartNotShow = ShowStartBll.LoadEntities(u => u.StartOrEnd == 1 && u.ReadDate == today);
+            //未开演
+            IQueryable<showstarts> showstartNotShow = ShowStartBll.LoadEntities(u => u.startime > today);
             int NotShowCount = showstartNotShow.Count();
             ViewData["NotShow"] = NotShowCount;
 
-            //收藏
-            CollectionService CollectionBll = new CollectionService();
-            IQueryable<collection> collection = CollectionBll.LoadEntities(u => u.username == user.username);
-            int collectionCount = collection.Count();
-            ViewData["Collect"] = collectionCount;
+            //监控的歌手
+            MonitorService monitorService = new MonitorService();
+            IQueryable<monitor> monitors = monitorService.LoadEntities(u => u.username == user.username);
+            int collectionCount = monitors.Count();
+            ViewData["Monitor"] = collectionCount;
 
             return View();
         }

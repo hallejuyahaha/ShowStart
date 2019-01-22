@@ -27,12 +27,12 @@ namespace ShowStartWeb
         //}
 
         [WebMethod]
-        public List<showstart> GetShow()
+        public List<showstarts> GetShow()
         {
             ShowStartService ShowStartBll = new ShowStartService();
-            IQueryable<showstart> shows = ShowStartBll.LoadEntities(u => u.ReadDate == DateTime.Today && u.StartOrEnd == 1);
+            IQueryable<showstarts> shows = ShowStartBll.LoadEntities(u => u.startime > DateTime.Today);
 
-            List <showstart> ad = shows.ToList();
+            List <showstarts> ad = shows.ToList();
             return ad;
         }
     }

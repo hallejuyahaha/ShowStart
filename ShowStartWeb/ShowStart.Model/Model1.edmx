@@ -4,181 +4,141 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="testModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="cnblognews">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="author" Type="varchar" MaxLength="255" />
-          <Property Name="watch" Type="varchar" MaxLength="255" />
-          <Property Name="comment" Type="varchar" MaxLength="255" />
-          <Property Name="favorite" Type="varchar" MaxLength="255" />
-          <Property Name="content" Type="text" />
-          <Property Name="url" Type="varchar" MaxLength="255" />
-          <Property Name="title" Type="varchar" MaxLength="255" />
-        </EntityType>
-        <EntityType Name="collection">
-          <Key>
-            <PropertyRef Name="url" />
-          </Key>
-          <Property Name="username" Type="varchar" MaxLength="20" />
-          <Property Name="url" Type="varchar" MaxLength="255" Nullable="false" />
-        </EntityType>
-        <EntityType Name="showstart">
+      <Schema Namespace="showstartModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="monitor">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="showname" Type="varchar" MaxLength="255" />
           <Property Name="actor" Type="varchar" MaxLength="255" />
-          <Property Name="price" Type="decimal" Precision="64" Scale="0" />
-          <Property Name="time" Type="varchar" MaxLength="255" />
-          <Property Name="starttime" Type="datetime" Precision="0" />
-          <Property Name="place" Type="varchar" MaxLength="255" />
+          <Property Name="username" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“def.showstart.showstarts”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="showstarts">
+          <Key>
+            <PropertyRef Name="showname" />
+          </Key>
+          <Property Name="showname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="actor" Type="varchar" MaxLength="255" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="0" />
+          <Property Name="startime" Type="datetime" Precision="0" />
+          <Property Name="place" Type="varchar" MaxLength="50" />
           <Property Name="url" Type="varchar" MaxLength="255" />
-          <Property Name="type" Type="varchar" MaxLength="255" />
-          <Property Name="StartOrEnd" Type="tinyint" />
-          <Property Name="ReadSessionTime" Type="datetime" Precision="0" />
+          <Property Name="type" Type="varchar" MaxLength="10" />
           <Property Name="front_image_path" Type="varchar" MaxLength="255" />
-          <Property Name="ReadDate" Type="datetime" Precision="0" />
+          <Property Name="readtime" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="userinfo">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="username" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="username" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="daywarning" Type="bool" />
+          <Property Name="username" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="255" />
-          <Property Name="accountName" Type="varchar" MaxLength="255" />
+          <Property Name="accountName" Type="varchar" MaxLength="10" />
           <Property Name="phoneNumber" Type="varchar" MaxLength="11" />
+          <Property Name="sex" Type="varchar" MaxLength="5" />
         </EntityType>
-        <EntityContainer Name="testModelStoreContainer">
-          <EntitySet Name="cnblognews" EntityType="Self.cnblognews" Schema="test" store:Type="Tables" />
-          <EntitySet Name="collection" EntityType="Self.collection" Schema="test" store:Type="Tables" />
-          <EntitySet Name="showstart" EntityType="Self.showstart" Schema="test" store:Type="Tables" />
-          <EntitySet Name="userinfo" EntityType="Self.userinfo" Schema="test" store:Type="Tables" />
+        <EntityContainer Name="showstartModelStoreContainer">
+          <EntitySet Name="monitor" EntityType="Self.monitor" Schema="showstart" store:Type="Tables" />
+          <EntitySet Name="userinfo" EntityType="Self.userinfo" Schema="showstart" store:Type="Tables" />
+          <EntitySet Name="showstarts" EntityType="Self.showstarts" store:Type="Tables" store:Schema="showstart">
+            <DefiningQuery>SELECT
+`showstarts`.`showname`, 
+`showstarts`.`actor`, 
+`showstarts`.`price`, 
+`showstarts`.`startime`, 
+`showstarts`.`place`, 
+`showstarts`.`url`, 
+`showstarts`.`type`, 
+`showstarts`.`front_image_path`, 
+`showstarts`.`readtime`
+FROM `showstarts` AS `showstarts`</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cnblognews">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="author" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="watch" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="favorite" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="content" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="collection">
-          <Key>
-            <PropertyRef Name="url" />
-          </Key>
-          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="showstart">
+      <Schema Namespace="showstartModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="monitor">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="showname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="actor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="price" Type="Decimal" />
-          <Property Name="time" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="starttime" Type="DateTime" />
-          <Property Name="place" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="StartOrEnd" Type="SByte" />
-          <Property Name="ReadSessionTime" Type="DateTime" />
-          <Property Name="front_image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="ReadDate" Type="DateTime" />
+          <Property Name="username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="userinfo">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="username" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="daywarning" Type="Boolean" />
+          <Property Name="username" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="accountName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="accountName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="phoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="sex" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cnblognews" EntityType="Self.cnblognews" />
-          <EntitySet Name="collection" EntityType="Self.collection" />
-          <EntitySet Name="showstart" EntityType="Self.showstart" />
+        <EntityType Name="showstarts">
+          <Key>
+            <PropertyRef Name="showname" />
+          </Key>
+          <Property Name="showname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" />
+          <Property Name="startime" Type="DateTime" />
+          <Property Name="place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="front_image_path" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="readtime" Type="DateTime" />
+        </EntityType>
+        <EntityContainer Name="showstartEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="monitor" EntityType="Self.monitor" />
           <EntitySet Name="userinfo" EntityType="Self.userinfo" />
+          <EntitySet Name="showstarts" EntityType="Self.showstarts" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="testEntities">
-          <EntitySetMapping Name="cnblognews">
-            <EntityTypeMapping TypeName="testModel.cnblognews">
-              <MappingFragment StoreEntitySet="cnblognews">
+        <EntityContainerMapping StorageEntityContainer="showstartModelStoreContainer" CdmEntityContainer="showstartEntities">
+          <EntitySetMapping Name="monitor">
+            <EntityTypeMapping TypeName="showstartModel.monitor">
+              <MappingFragment StoreEntitySet="monitor">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="author" ColumnName="author" />
-                <ScalarProperty Name="watch" ColumnName="watch" />
-                <ScalarProperty Name="comment" ColumnName="comment" />
-                <ScalarProperty Name="favorite" ColumnName="favorite" />
-                <ScalarProperty Name="content" ColumnName="content" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="title" ColumnName="title" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="collection">
-            <EntityTypeMapping TypeName="testModel.collection">
-              <MappingFragment StoreEntitySet="collection">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="url" ColumnName="url" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="showstart">
-            <EntityTypeMapping TypeName="testModel.showstart">
-              <MappingFragment StoreEntitySet="showstart">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="showname" ColumnName="showname" />
                 <ScalarProperty Name="actor" ColumnName="actor" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="starttime" ColumnName="starttime" />
-                <ScalarProperty Name="place" ColumnName="place" />
-                <ScalarProperty Name="url" ColumnName="url" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="StartOrEnd" ColumnName="StartOrEnd" />
-                <ScalarProperty Name="ReadSessionTime" ColumnName="ReadSessionTime" />
-                <ScalarProperty Name="front_image_path" ColumnName="front_image_path" />
-                <ScalarProperty Name="ReadDate" ColumnName="ReadDate" />
+                <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="userinfo">
-            <EntityTypeMapping TypeName="testModel.userinfo">
+            <EntityTypeMapping TypeName="showstartModel.userinfo">
               <MappingFragment StoreEntitySet="userinfo">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="daywarning" ColumnName="daywarning" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="accountName" ColumnName="accountName" />
                 <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="showstarts">
+            <EntityTypeMapping TypeName="showstartModel.showstarts">
+              <MappingFragment StoreEntitySet="showstarts">
+                <ScalarProperty Name="showname" ColumnName="showname" />
+                <ScalarProperty Name="actor" ColumnName="actor" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="startime" ColumnName="startime" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="front_image_path" ColumnName="front_image_path" />
+                <ScalarProperty Name="readtime" ColumnName="readtime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,7 +19,7 @@ namespace ShowStart.Dal
             DbContext dbContext = HttpContext.Current.Items["dbContext"] as DbContext;
             if (dbContext == null)
             {
-                dbContext = new testEntities();
+                dbContext = new showstartEntities();
                 HttpContext.Current.Items["dbContext"] = dbContext;
             }
             return dbContext;

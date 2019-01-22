@@ -56,22 +56,41 @@ namespace ShowStart.DalFactory
             }
         }
 
-        private ICollectionDal _CollectionDal;
-        public ICollectionDal CollectionDal
+        //private ICollectionDal _CollectionDal;
+        //public ICollectionDal CollectionDal
+        //{
+        //    get
+        //    {
+        //        if (_CollectionDal == null)
+        //        {
+        //            _CollectionDal = AbstractFactory.createCollectionDal();//通过抽象工厂创建实例
+        //        }
+        //        return _CollectionDal;
+        //    }
+        //    set
+        //    {
+        //        _CollectionDal = value;
+        //    }
+        //}
+
+        private IMonitorDal _MonitorDal;
+        public IMonitorDal MonitorDal
         {
             get
             {
-                if (_CollectionDal == null)
+                if (_MonitorDal == null)
                 {
-                    _CollectionDal = AbstractFactory.createCollectionDal();//通过抽象工厂创建实例
+                    _MonitorDal = AbstractFactory.createCollectionDal();//通过抽象工厂创建实例
                 }
-                return _CollectionDal;
+                return _MonitorDal;
             }
             set
             {
-                _CollectionDal = value;
+                _MonitorDal = value;
             }
         }
+
+
 
         /// <summary>
         /// 连接一次数据库，对多张表进行操作

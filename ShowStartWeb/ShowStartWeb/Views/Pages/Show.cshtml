@@ -57,7 +57,7 @@
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
                         <li><a href="../Home/Index">首页</a></li>
                         <li><a class="menu-top-active" href="../Pages/Show">全部演出</a></li>
-                        <li><a href="../Pages/Collect">我的收藏</a></li>
+                        <li><a href="../Pages/Collect">我的监控</a></li>
                         <li><a href="../Pages/AUs">关于我们</a></li>
                     </ul>
                 </div>
@@ -86,7 +86,7 @@
                             <p>类型：@a.type</p>
                             <p>艺人：@a.actor</p>
                             <p>价格：<b>@a.price</b></p>
-                            <p>@a.time</p>
+                            <p>@a.startime</p>
                             <p>地点：@a.place</p>
                         </a>
                         @*@using (Ajax.BeginForm("MyCollect", "Pages", new AjaxOptions()
@@ -97,14 +97,14 @@
 
                             })) { }  mvc ajax*@
 
-                        @if (a.IsCollect == 1)
+                        @*@if (a.IsCollect == 1)
                         {
                             <button type="button" id="CollectState" value="1" class="btn btn-primary btn-lg">已收藏</button>
                         }
                         else
                         {
                             <button type="button" id="CollectState" value="0"  class="btn btn-info btn-lg">收藏</button>
-                        }
+                        }*@
                     </li>
                 }
             </ul>

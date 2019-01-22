@@ -25,7 +25,7 @@ class ShowstartspiderSpider(scrapy.Spider):
         # chrome_opt.add_experimental_option("prefs", prefs)
         chrome_opt.add_argument('--headless')
         chrome_opt.add_argument('--disable-gpu')
-        self.browser = webdriver.Chrome(executable_path="E:\chromedriver\chromedriver.exe", chrome_options=chrome_opt)
+        self.browser = webdriver.Chrome(executable_path="F:\chromedriver.exe", chrome_options=chrome_opt)
         super(ShowstartspiderSpider, self).__init__()
         dispatcher.connect(self.spider_closed, signals.spider_closed)
 
@@ -60,8 +60,10 @@ class ShowstartspiderSpider(scrapy.Spider):
             if match_re:
                 startTime = startTime_match_re.group(1)
             #传送运行
-            yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price, "StartTime":startTime}, callback=self.parse_detail)#"price":price,
-
+            if overornot == 1:
+                yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price, "StartTime":startTime}, callback=self.parse_detail)#"price":price,
+            else:
+                pass
         # 提取下一页并交给scrapy进行下载
         next_url = response.css(".page-next::attr(href)").extract_first("")
         if next_url:

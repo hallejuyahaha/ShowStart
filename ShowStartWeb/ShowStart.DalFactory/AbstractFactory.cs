@@ -29,10 +29,15 @@ namespace ShowStart.DalFactory
             return CreateInstance(fullClassName) as IShowStartDal;
         }
 
-        public static ICollectionDal createCollectionDal()
+        //public static ICollectionDal createCollectionDal()
+        //{
+        //    string fullClassName = NameSpace + ".CollectionDal";
+        //    return CreateInstance(fullClassName) as ICollectionDal;
+        //}
+        public static IMonitorDal createCollectionDal()
         {
-            string fullClassName = NameSpace + ".CollectionDal";
-            return CreateInstance(fullClassName) as ICollectionDal;
+            string fullClassName = NameSpace + ".MonitorDal";
+            return CreateInstance(fullClassName) as IMonitorDal;
         }
 
         private static object CreateInstance(string ClassName)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShowStart.IBll
 {
-    public interface IShowStartService : IBaseService<showstart>
+    public interface IShowStartService : IBaseService<showstarts>
     {
     }
 }
