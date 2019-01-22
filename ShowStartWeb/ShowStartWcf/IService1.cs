@@ -50,6 +50,30 @@ namespace ShowStartWcf
         /// <returns></returns>
         [OperationContract]
         int Register(string username, string password, string email, string phonenumber, string sex, string accountName);
+
+        /// <summary>
+        /// 获取 username用户监控的歌手
+        /// </summary>
+        /// <param name="username">该用户</param>
+        /// <returns></returns>
+        [OperationContract]
+        List<monitor> GetMonitors(string username);
+
+        /// <summary>
+        /// 添加 监控歌手
+        /// </summary>
+        /// <param name="monitor"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool AddMonitors(monitor monitor);
+
+        /// <summary>
+        /// 删除 监控歌手
+        /// </summary>
+        /// <param name="monitor"></param>
+        /// <returns></returns>
+        [OperationContract]
+        bool DeleteMonitors(monitor monitor);
     }
 
 

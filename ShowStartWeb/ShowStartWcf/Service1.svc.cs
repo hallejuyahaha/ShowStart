@@ -59,6 +59,28 @@ namespace ShowStartWcf
             return composite;
         }
 
+        public bool DeleteMonitors(monitor monitor)
+        {
+            MonitorService monitorService = new MonitorService();
+            bool t = monitorService.DeleteEntity(monitor);            
+            return t;
+        }
+
+        public bool AddMonitors(monitor monitor)
+        {
+            MonitorService monitorService = new MonitorService();
+            bool t = monitorService.AddEntity(monitor);
+            return t;
+        }
+
+        public List<monitor> GetMonitors(string username)
+        {
+            MonitorService monitorService = new MonitorService();
+            IQueryable<monitor> monitors = monitorService.LoadEntities(_x => _x.username == username);
+            List<monitor> a = monitors.ToList();
+            return a;
+        }
+
         public List<showstarts> GetShow()
         {
             ShowStartService ShowStartBll = new ShowStartService();
