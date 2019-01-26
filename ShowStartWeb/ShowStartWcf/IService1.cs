@@ -21,9 +21,9 @@ namespace ShowStartWcf
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: 在此添加您的服务操作
-    
+
         [OperationContract]
-        List<showstarts> GetShow();
+        Dictionary<string, List<showstarts>> GetShow(string username);
 
         /// <summary>
         /// 登陆接口，
@@ -33,7 +33,7 @@ namespace ShowStartWcf
         /// <param name="username">用户名</param>
         /// <param name="password">密码</param>
         /// <returns></returns>
-        [OperationContract]       
+        [OperationContract]
         int Login(string username, string password);
 
         /// <summary>

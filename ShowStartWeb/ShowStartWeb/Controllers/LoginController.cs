@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using log4net;
+using Newtonsoft.Json.Linq;
 using ShowStart.Bll;
 using ShowStart.Model;
 using System;
@@ -11,6 +12,7 @@ namespace ShowStartWeb.Controllers
 {
     public class LoginController : Controller
     {
+        public readonly static ILog _log = LogManager.GetLogger(typeof(LoginController));
         // GET: Login
         public ActionResult Index()
         {
@@ -19,7 +21,8 @@ namespace ShowStartWeb.Controllers
 
         public JObject UserLogin()
         {
-            JObject jo = new JObject();
+            _log.Debug("UserLogin");
+        JObject jo = new JObject();
             string loginName = Request["login"];
             string pwd = Request["pwd"];
             UserInfoService user = new ShowStart.Bll.UserInfoService();

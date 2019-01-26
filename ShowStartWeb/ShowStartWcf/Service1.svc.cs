@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using log4net;
 using ShowStart.Bll;
+using ShowStart.Common;
 using ShowStart.Model;
 
 namespace ShowStartWcf
@@ -14,7 +18,9 @@ namespace ShowStartWcf
     // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 Service1.svc 或 Service1.svc.cs，然后开始调试。
     public class Service1 : IService1
     {
+        readonly static ILog _log = LogManager.GetLogger(typeof(Service1));
 
+        //要添加log4net.config到项目中
         ////其他成员
         //public event System.EventHandler AddComplete;
         //public IAsyncResult BeginAdd(double x, double y, AsyncCallback callback, object asyncState)
@@ -81,13 +87,41 @@ namespace ShowStartWcf
             return a;
         }
 
-        public List<showstarts> GetShow()
+        Dictionary<string, List<showstarts>> IService1.GetShow(string username)
         {
+
+            string dir = System.Web.Hosting.HostingEnvironment.MapPath("~/bin/Log4net.config");
+            FileInfo f = new FileInfo(dir);
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(f);
+      
+            Dictionary<string, List<showstarts>> keys = new Dictionary<string, List<showstarts>>();
             ShowStartService ShowStartBll = new ShowStartService();
-            IQueryable<showstarts> shows = ShowStartBll.LoadEntities(u => u.startime > DateTime.Today);
-            List<showstarts> a = shows.ToList();
-            return a;
+            //get all shows
+            IQueryable<showstarts> shows = ShowStartBll.LoadEntities(u => u.showname != "" &&  u.startime > DateTime.Now);
+            List<showstarts> DBShows = shows.ToList();
+            //get redis shows
+            List<showstarts> redisShows = RedisCacheHelper.Get<List<showstarts>>(username);
+            //过去新show
+            OrderCompare oc = new OrderCompare();
+            List<showstarts> newShow;
+            List<showstarts> oldShow;
+            if (redisShows == null)
+            {
+                newShow = DBShows;
+            }
+            else {
+                newShow = DBShows.Except(redisShows, oc).ToList();
+            }
+            oldShow = DBShows.Except(newShow, oc).ToList();
+
+            //将新show和老show塞进dic
+            keys.Add("newshow", newShow);
+            keys.Add("oldshow", oldShow);
+            //更新redis
+            RedisCacheHelper.Add<List<showstarts>>(username, DBShows);
+            return keys;
         }
+
 
         public int Login(string username, string password)
         {
@@ -130,5 +164,46 @@ namespace ShowStartWcf
         public bool Cancelled { get; }
         public Exception Error { get; }
         public object UserState { get; }
+    }
+    //比较器
+    public class OrderCompare : IEqualityComparer<showstarts>
+    {
+        public bool Equals(showstarts o1, showstarts o2)
+        {
+
+            if (Object.ReferenceEquals(o1, o2))
+            {
+                return true;
+            }
+
+            if (Object.ReferenceEquals(o1, null) || Object.ReferenceEquals(o2, null))
+            {
+                return false;
+            }
+
+            bool flag = o1.showname.Equals(o2.showname) 
+                     && o1.actor.Equals(o2.actor) 
+                     && o1.price.Equals(o2.price) 
+                     && o1.startime.Equals(o2.startime) 
+                     && o1.place.Equals(o2.place)
+                     && o1.url.Equals(o2.url)
+                     && o1.type.Equals(o2.type)
+                     && o1.front_image_path.Equals(o2.front_image_path)
+                     && o1.readtime.Equals(o2.readtime);
+            return flag;
+        }
+
+        public int GetHashCode(showstarts oinfo)
+        {
+            if (oinfo == null)
+            {
+                return 0;
+            }
+            else
+            {
+                int hashresult = oinfo.ToString().GetHashCode();
+                return hashresult;
+            }
+        }
     }
 }
