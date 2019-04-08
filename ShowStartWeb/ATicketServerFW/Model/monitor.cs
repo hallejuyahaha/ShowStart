@@ -7,21 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShowStart.Model
+namespace ATicketServerFW.Model
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class showstarts
+    public partial class monitor
     {
-        public string showname { get; set; }
+        public long id { get; set; }
         public string actor { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public System.DateTime startime { get; set; }
-        public string place { get; set; }
-        public string url { get; set; }
-        public string type { get; set; }
-        public string front_image_path { get; set; }
-        public Nullable<System.DateTime> readtime { get; set; }
+        public string username { get; set; }
     }
 }

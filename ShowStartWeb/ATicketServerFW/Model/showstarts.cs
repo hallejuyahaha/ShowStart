@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShowStart.Model
+namespace ATicketServerFW.Model
 {
     using System;
     using System.Collections.Generic;
