@@ -1,4 +1,4 @@
 @echo on
 f: 
-cd F:\PythonProject\ShowStart\ShowStart
-F:\Env\ShowStart\Scripts\scrapy.exe crawl ShowStartSpider
+cd F:\Project\ShowStart\ShowStart\ShowStart
+F:\Env\showstartenv\Scripts\scrapy.exe crawl ShowStartSpider

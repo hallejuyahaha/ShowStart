@@ -16,8 +16,7 @@ from scrapy import signals
 class ShowstartspiderSpider(scrapy.Spider):
     name = 'ShowStartSpider'
     allowed_domains = ['www.showstart.com']
-    start_urls = ['https://www.showstart.com/event/list?cityId=25&isList=1&pageNo=1']
-
+    start_urls = ['https://www.showstart.com/event/list?cityId=371&siteId=0']
     def __init__(self,**kwargs):
         # chrome不加载图片
         chrome_opt = webdriver.ChromeOptions()
@@ -51,7 +50,7 @@ class ShowstartspiderSpider(scrapy.Spider):
                 price = 0
             else:
                 pricetemp = post_node.css(".g-price .col-theme::text").extract_first("")
-                match_re = re.match("￥(\d+)[\s\S]*", pricetemp)
+                match_re = re.match("¥(\d+)[\s\S]*", pricetemp)
                 if match_re:
                     price = match_re.group(1)
             #获取开始时间
@@ -61,7 +60,9 @@ class ShowstartspiderSpider(scrapy.Spider):
                 startTime = startTime_match_re.group(1)
             #传送运行
             if overornot == 1:
-                yield Request(url=parse.urljoin(response.url, post_url),meta={ "OverOrNot": overornot, "Price":price, "StartTime":startTime}, callback=self.parse_detail)#"price":price,
+                yield Request(url=parse.urljoin(response.url, post_url),
+                              meta={"OverOrNot": overornot, "Price": price, "StartTime": startTime},
+                              callback=self.parse_detail)
             else:
                 pass
         # 提取下一页并交给scrapy进行下载
